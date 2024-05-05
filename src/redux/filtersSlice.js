@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const filtersSlice = createSlice({
   name: "filters",
   initialState: {
-    name: "" 
+    contacts: {
+      items: ['']
+    }
   },
 
   reducers: {
@@ -20,5 +22,5 @@ const filtersSlice = createSlice({
 
 
 
-export default filtersSlice.reducer;
+export const {filtersContact} = filtersSlice.actions;
 

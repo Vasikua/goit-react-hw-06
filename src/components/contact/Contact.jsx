@@ -7,7 +7,10 @@ import {deleteContact} from "../../redux/contactsSlice";
 export default function Contact({data: {id, name, number }}) {
 
     const dispatch = useDispatch();
-    //  const contacts = useSelector((state) => state.contacts.items);
+    const handleDelete = () => {
+        dispatch(deleteContact(id));
+    }
+    
     return (
         <>
         <div className={css.container}>    
@@ -23,7 +26,7 @@ export default function Contact({data: {id, name, number }}) {
                 
         <button
                 className={css.deleteBtn}
-                onClick={() => dispatch(deleteContact({id}))}>
+                onClick={handleDelete}>
             Delete
         </button>
     </>

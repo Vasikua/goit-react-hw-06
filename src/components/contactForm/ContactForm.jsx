@@ -1,11 +1,10 @@
-import { useId, useState } from 'react';
-import { nanoid } from 'nanoid';
-import { ErrorMessage,Field,Form, Formik } from "formik";
-import * as Yup from "yup";
-import { useDispatch} from 'react-redux';
-import css from './ContactForm.module.css';
-import{addContact} from '../../redux/contactsSlice'
 
+import css from './ContactForm.module.css';
+import * as Yup from "yup";
+import { ErrorMessage,Field,Form, Formik } from "formik";
+import { useDispatch } from 'react-redux';
+import { useId} from 'react';
+import{addContact} from '../../redux/contactsSlice'
  
 const UserSchema =Yup.object().shape({
   username: Yup.string().min(3, "must be at least 3 chars").required("Is required"),
@@ -14,15 +13,13 @@ const UserSchema =Yup.object().shape({
 
 export default function ContactForm() {
     const dispatch = useDispatch();
-    const [name, setName] = useState('');
-    const [number, setNumber] = useState(null);
-    const [id, setId] = useState(null);
-    
+       
     const addCont = (values, actions) => {
-        
-        setName(values.username.trim());
-        setNumber(values.number);
-        setId(nanoid());
+        const newContAdd = {
+        name: values.username.trim(),
+        number: values.number
+        }
+        dispatch(addContact(newContAdd))
         actions.resetForm();
 
     }
@@ -36,10 +33,7 @@ export default function ContactForm() {
             number: "",
         }}
             validationSchema={UserSchema}
-            onSubmit={(values, actions) => {
-                addCont(values, actions);
-                dispatch(addContact({ id, name, number }))
-            }}>
+            onSubmit={addCont}>
             <Form className={css.form}>
                 <div className={css.group}>
                     <label htmlFor={usernameId}>Name</label>

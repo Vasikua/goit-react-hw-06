@@ -2,16 +2,7 @@ import { contactsReducer } from './contactsSlice.js';
 import { configureStore } from '@reduxjs/toolkit';
 import { filterReducer } from './filtersSlice.js';
 import storage from 'redux-persist/lib/storage';
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
+import {   persistStore,  persistReducer,  FLUSH,  REHYDRATE,  PAUSE,  PERSIST,  PURGE,  REGISTER,} from 'redux-persist';
 
 const contactsPersistConfig = {
   key: 'contacts',
@@ -19,14 +10,14 @@ const contactsPersistConfig = {
   whitelist: ['items'],
 };
 
-const memoryContactsReducer = persistReducer(
+const ContReducer = persistReducer(
   contactsPersistConfig,
   contactsReducer
 );
 
 export const store = configureStore({
   reducer: {
-    contacts: memoryContactsReducer,
+    contacts: ContReducer,
     filters: filterReducer,
   },
   middleware: getDefaultMiddleware =>

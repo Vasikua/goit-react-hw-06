@@ -3,8 +3,10 @@ import css from './ContactForm.module.css';
 import * as Yup from "yup";
 import { ErrorMessage,Field,Form, Formik } from "formik";
 import { useDispatch } from 'react-redux';
-import { useId} from 'react';
+import { useId } from 'react';
+import { nanoid } from 'nanoid';
 import{addContact} from '../../redux/contactsSlice'
+
  
 const UserSchema =Yup.object().shape({
   username: Yup.string().min(3, "must be at least 3 chars").required("Is required"),
@@ -17,7 +19,8 @@ export default function ContactForm() {
     const addCont = (values, actions) => {
         const newContAdd = {
         name: values.username.trim(),
-        number: values.number
+        number: values.number,
+        id: nanoid(),
         }
         dispatch(addContact(newContAdd))
         actions.resetForm();

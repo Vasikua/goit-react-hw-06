@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { useId } from 'react';
 import { nanoid } from 'nanoid';
 import{addContact} from '../../redux/contactsSlice'
-
  
 const UserSchema =Yup.object().shape({
   username: Yup.string().min(3, "must be at least 3 chars").required("Is required"),
@@ -15,7 +14,6 @@ const UserSchema =Yup.object().shape({
 
 export default function ContactForm() {
     const dispatch = useDispatch();
-       
     const addCont = (values, actions) => {
         const newContAdd = {
         name: values.username.trim(),
@@ -28,7 +26,6 @@ export default function ContactForm() {
     }
     const usernameId = useId();
     const numberId = useId();
-
 
     return (
         <Formik initialValues={{
